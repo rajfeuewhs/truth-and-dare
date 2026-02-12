@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Spin The Bottle Ultimate</title>
+<title>Spin Bottle Pro Max</title>
 
 <style>
 body{
@@ -16,9 +16,15 @@ align-items:center;
 flex-direction:column;
 height:100vh;
 color:#00ffaa;
+transition:0.5s;
 }
 
-/* 🌌 Galaxy Background */
+/* Neon Mode */
+.neon{
+background:radial-gradient(circle,#001f2f,#000);
+color:#00ffff;
+}
+
 canvas{
 position:fixed;
 top:0;
@@ -26,7 +32,6 @@ left:0;
 z-index:-1;
 }
 
-/* Pointer */
 .pointer{
 position:fixed;
 top:10px;
@@ -34,19 +39,15 @@ font-size:40px;
 color:#ff0044;
 }
 
-/* Bottle Image */
 #bottle{
 height:75vh;
-transition:transform 5s cubic-bezier(.1,.7,.2,1);
-filter:drop-shadow(0 0 30px rgba(0,255,150,0.4));
+filter:drop-shadow(0 0 25px rgba(0,255,150,0.4));
 }
 
-/* Spin Button */
-.spin-btn{
+.spin-btn, .neon-btn{
 position:fixed;
-bottom:30px;
-padding:15px 50px;
-font-size:22px;
+padding:15px 40px;
+font-size:18px;
 border:none;
 border-radius:40px;
 cursor:pointer;
@@ -54,7 +55,9 @@ background:linear-gradient(45deg,#00ffaa,#0088ff);
 color:black;
 }
 
-/* Popup */
+.spin-btn{ bottom:30px; }
+.neon-btn{ bottom:90px; }
+
 .popup{
 display:none;
 position:fixed;
@@ -85,7 +88,6 @@ border-radius:30px;
 cursor:pointer;
 }
 
-/* Confetti */
 .confetti{
 position:fixed;
 width:12px;
@@ -108,10 +110,12 @@ opacity:0;
 <canvas id="stars"></canvas>
 <div class="pointer">⬇</div>
 
-<!-- 🥃 YOUR REAL BOTTLE -->
 <img id="bottle" src="bottle.png">
 
+<button class="neon-btn" onclick="toggleNeon()">💎 Neon Mode</button>
 <button class="spin-btn" onclick="spinBottle()">SPIN</button>
+
+<audio id="spinSound" src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-wheel-2079.mp3"></audio>
 
 <div id="popup" class="popup">
 <div class="popup-content">
@@ -153,8 +157,9 @@ requestAnimationFrame(animateStars);
 }
 animateStars();
 
-/* Game Logic */
+/* GAME LOGIC */
 var spinning=false;
+var angle=0;
 
 var dares=[
 "Do 20 pushups 😈",
@@ -170,14 +175,25 @@ if(spinning) return;
 spinning=true;
 
 var bottle=document.getElementById("bottle");
-var randomDegree=Math.floor(Math.random()*3600+1440);
+var sound=document.getElementById("spinSound");
 
-bottle.style.transform="rotate("+randomDegree+"deg)";
+sound.play();
 
-setTimeout(function(){
-showDare();
+let velocity=50;  // starting speed
+
+function rotate(){
+velocity*=0.97;   // slow down gradually
+angle+=velocity;
+bottle.style.transform="rotate("+angle+"deg)";
+
+if(velocity>0.5){
+requestAnimationFrame(rotate);
+}else{
 spinning=false;
-},5000);
+showDare();
+}
+}
+rotate();
 }
 
 function showDare(){
@@ -200,6 +216,10 @@ confetti.style.background="hsl("+Math.random()*360+",100%,50%)";
 document.body.appendChild(confetti);
 setTimeout(()=>{confetti.remove();},3000);
 }
+}
+
+function toggleNeon(){
+document.body.classList.toggle("neon");
 }
 
 </script>
