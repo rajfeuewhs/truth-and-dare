@@ -2,28 +2,46 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Code Bottle Spin</title>
+<title>Spin The Bottle Ultimate</title>
 
 <style>
 body{
 margin:0;
 overflow:hidden;
-background:radial-gradient(circle at center,#111,#000);
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-height:100vh;
+background:black;
 font-family:Arial;
-color:#00ffff;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+height:100vh;
+color:#00ffaa;
 }
 
-svg{
-height:80vh;
-transition:transform 4s cubic-bezier(.17,.67,.83,.67);
-filter:drop-shadow(0 0 40px #00ffff);
+/* 🌌 Galaxy Background */
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
 }
 
+/* Pointer */
+.pointer{
+position:fixed;
+top:10px;
+font-size:40px;
+color:#ff0044;
+}
+
+/* Bottle Image */
+#bottle{
+height:75vh;
+transition:transform 5s cubic-bezier(.1,.7,.2,1);
+filter:drop-shadow(0 0 30px rgba(0,255,150,0.4));
+}
+
+/* Spin Button */
 .spin-btn{
 position:fixed;
 bottom:30px;
@@ -32,10 +50,11 @@ font-size:22px;
 border:none;
 border-radius:40px;
 cursor:pointer;
-background:linear-gradient(45deg,#00ffff,#0088ff);
+background:linear-gradient(45deg,#00ffaa,#0088ff);
 color:black;
 }
 
+/* Popup */
 .popup{
 display:none;
 position:fixed;
@@ -46,14 +65,14 @@ backdrop-filter:blur(10px);
 
 .popup-content{
 background:#111;
-color:#00ffff;
+color:#00ffaa;
 padding:50px;
 border-radius:25px;
 width:90%;
 max-width:600px;
 margin:10% auto;
 text-align:center;
-box-shadow:0 0 40px #00ffff;
+box-shadow:0 0 40px #00ffaa;
 }
 
 .close-btn{
@@ -66,6 +85,7 @@ border-radius:30px;
 cursor:pointer;
 }
 
+/* Confetti */
 .confetti{
 position:fixed;
 width:12px;
@@ -85,26 +105,11 @@ opacity:0;
 
 <body>
 
-<!-- 🧿 CODE MADE BOTTLE -->
-<svg id="bottle" viewBox="0 0 200 600">
-<defs>
-<linearGradient id="glass" x1="0%" y1="0%" x2="0%" y2="100%">
-<stop offset="0%" stop-color="#00ffaa"/>
-<stop offset="100%" stop-color="#006644"/>
-</linearGradient>
-</defs>
+<canvas id="stars"></canvas>
+<div class="pointer">⬇</div>
 
-<!-- Bottle Neck -->
-<rect x="85" y="0" width="30" height="100" fill="url(#glass)" />
-
-<!-- Bottle Body -->
-<path d="M60 100 
-         Q50 200 50 400 
-         Q50 550 100 580 
-         Q150 550 150 400 
-         Q150 200 140 100 Z" 
-fill="url(#glass)"/>
-</svg>
+<!-- 🥃 YOUR REAL BOTTLE -->
+<img id="bottle" src="bottle.png">
 
 <button class="spin-btn" onclick="spinBottle()">SPIN</button>
 
@@ -118,6 +123,37 @@ fill="url(#glass)"/>
 
 <script>
 
+/* 🌌 Galaxy Background */
+const canvas=document.getElementById("stars");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let stars=[];
+for(let i=0;i<150;i++){
+stars.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2,
+s:Math.random()*0.5
+});
+}
+
+function animateStars(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="white";
+stars.forEach(star=>{
+ctx.beginPath();
+ctx.arc(star.x,star.y,star.r,0,Math.PI*2);
+ctx.fill();
+star.y+=star.s;
+if(star.y>canvas.height) star.y=0;
+});
+requestAnimationFrame(animateStars);
+}
+animateStars();
+
+/* Game Logic */
 var spinning=false;
 
 var dares=[
@@ -125,7 +161,8 @@ var dares=[
 "Dance crazy for 30 seconds 🔥",
 "Sing loudly for 20 sec 🎤",
 "Act like a villain 😎",
-"Talk in slow motion for 2 min 🐢"
+"Talk in slow motion for 2 min 🐢",
+"Confess something funny 😂"
 ];
 
 function spinBottle(){
@@ -140,7 +177,7 @@ bottle.style.transform="rotate("+randomDegree+"deg)";
 setTimeout(function(){
 showDare();
 spinning=false;
-},4000);
+},5000);
 }
 
 function showDare(){
@@ -161,7 +198,6 @@ confetti.classList.add("confetti");
 confetti.style.left=Math.random()*100+"vw";
 confetti.style.background="hsl("+Math.random()*360+",100%,50%)";
 document.body.appendChild(confetti);
-
 setTimeout(()=>{confetti.remove();},3000);
 }
 }
