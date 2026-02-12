@@ -1,125 +1,126 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <title>Ultimate Spin Bottle</title>
 
 <style>
-body {
-    margin: 0;
-    overflow: hidden;
-    background: radial-gradient(circle at center, #111, #000);
-    font-family: Arial, sans-serif;
-    text-align: center;
-    color: #00ffff;
+body{
+margin:0;
+overflow:hidden;
+background:radial-gradient(circle at center,#111,#000);
+font-family:Arial,sans-serif;
+text-align:center;
+color:#00ffff;
 }
 
-/* MODE BUTTONS TOP */
-.mode-buttons {
-    position: fixed;
-    top: 15px;
-    width: 100%;
-    z-index: 10;
+/* MODE BUTTONS */
+.mode-buttons{
+position:fixed;
+top:15px;
+width:100%;
+z-index:10;
 }
 
-.mode-buttons button {
-    padding: 8px 18px;
-    margin: 5px;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: bold;
+.mode-buttons button{
+padding:8px 18px;
+margin:5px;
+border:none;
+border-radius:20px;
+cursor:pointer;
+font-weight:bold;
 }
 
-.couple { background: #ff4da6; color: white; }
-.extreme { background: black; color: white; }
+.couple{background:#ff4da6;color:white;}
+.extreme{background:black;color:white;}
 
-/* 🔥 FULL SCREEN BOTTLE */
-#bottle-container {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+/* FULL SCREEN BOTTLE */
+#bottle-container{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
 }
 
-#bottle {
-    height: 80vh;   /* PURE SCREEN LOOK */
-    transition: transform 3s cubic-bezier(.17,.67,.83,.67);
-    filter: drop-shadow(0 0 40px #00ffff);
+#bottle{
+height:80vh;
+transition:transform 4s cubic-bezier(.17,.67,.83,.67);
+filter:drop-shadow(0 0 40px #00ffff);
 }
 
-/* 3D SHADOW */
-.shadow {
-    width: 300px;
-    height: 40px;
-    background: radial-gradient(ellipse at center, rgba(0,0,0,0.8) 0%, transparent 80%);
-    margin-top: -40px;
-    border-radius: 50%;
-    transition: transform 3s ease-out;
+/* SHADOW */
+.shadow{
+width:300px;
+height:40px;
+background:radial-gradient(ellipse at center,rgba(0,0,0,0.8) 0%,transparent 80%);
+margin-top:-40px;
+border-radius:50%;
+transition:transform 4s ease-out;
 }
 
 /* SPIN BUTTON */
-.spin-btn {
-    position: fixed;
-    bottom: 30px;
-    padding: 15px 50px;
-    font-size: 22px;
-    border: none;
-    border-radius: 40px;
-    cursor: pointer;
-    background: linear-gradient(45deg, #00ffff, #0088ff);
-    color: black;
+.spin-btn{
+position:fixed;
+bottom:30px;
+padding:15px 50px;
+font-size:22px;
+border:none;
+border-radius:40px;
+cursor:pointer;
+background:linear-gradient(45deg,#00ffff,#0088ff);
+color:black;
 }
 
 /* POPUP */
-.popup {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.9);
-    backdrop-filter: blur(10px);
+.popup{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.9);
+backdrop-filter:blur(10px);
 }
 
-.popup-content {
-    background: #111;
-    color: #00ffff;
-    padding: 50px;
-    border-radius: 25px;
-    width: 90%;
-    max-width: 700px;
-    margin: 10% auto;
-    box-shadow: 0 0 40px #00ffff;
-    text-align: center;
+.popup-content{
+background:#111;
+color:#00ffff;
+padding:50px;
+border-radius:25px;
+width:90%;
+max-width:700px;
+margin:10% auto;
+box-shadow:0 0 40px #00ffff;
+text-align:center;
 }
 
-.popup-content p {
-    font-size: 28px;
+.popup-content p{
+font-size:28px;
 }
 
-.close-btn {
-    margin-top: 20px;
-    padding: 10px 30px;
-    border: none;
-    background: red;
-    color: white;
-    border-radius: 30px;
-    cursor: pointer;
+.close-btn{
+margin-top:20px;
+padding:10px 30px;
+border:none;
+background:red;
+color:white;
+border-radius:30px;
+cursor:pointer;
 }
 
-/* 🌟 CONFETTI */
-.confetti {
-    position: fixed;
-    width: 12px;
-    height: 12px;
-    top: 0;
-    animation: fall 3s linear forwards;
+/* CONFETTI */
+.confetti{
+position:fixed;
+width:12px;
+height:12px;
+top:0;
+animation:fall 3s linear forwards;
 }
 
-@keyframes fall {
-    to {
-        transform: translateY(100vh) rotate(720deg);
-        opacity: 0;
-    }
+@keyframes fall{
+to{
+transform:translateY(100vh) rotate(720deg);
+opacity:0;
+}
 }
 </style>
 </head>
@@ -127,13 +128,13 @@ body {
 <body>
 
 <div class="mode-buttons">
-    <button class="couple" onclick="setMode('couple')">❤️ Couple Mode</button>
-    <button class="extreme" onclick="setMode('extreme')">😈 Extreme Mode</button>
+<button class="couple" onclick="setMode('couple')">❤️ Couple Mode</button>
+<button class="extreme" onclick="setMode('extreme')">😈 Extreme Mode</button>
 </div>
 
 <div id="bottle-container">
-    <img id="bottle" src="https://pngimg.com/uploads/bottle/bottle_PNG98938.png">
-    <div class="shadow" id="shadow"></div>
+<img id="bottle" src="https://pngimg.com/uploads/bottle/bottle_PNG98938.png">
+<div class="shadow" id="shadow"></div>
 </div>
 
 <button class="spin-btn" onclick="spinBottle()">SPIN</button>
@@ -141,18 +142,19 @@ body {
 <audio id="spinSound" src="https://www.soundjay.com/misc/sounds/bottle-spin-01.mp3"></audio>
 
 <div id="popup" class="popup">
-    <div class="popup-content">
-        <h2>Dare</h2>
-        <p id="dareText"></p>
-        <button class="close-btn" onclick="closePopup()">Close</button>
-    </div>
+<div class="popup-content">
+<h2>Dare</h2>
+<p id="dareText"></p>
+<button class="close-btn" onclick="closePopup()">Close</button>
+</div>
 </div>
 
 <script>
 
-var mode = "couple";
+var mode="couple";
+var spinning=false;
 
-var coupleDares = [
+var coupleDares=[
 "Hold hands for 1 minute ❤️",
 "Say something romantic 💕",
 "Give a warm hug 🤗",
@@ -160,7 +162,7 @@ var coupleDares = [
 "Whisper something sweet 😍"
 ];
 
-var extremeDares = [
+var extremeDares=[
 "Do 20 pushups 😈",
 "Dance crazy for 30 seconds 🔥",
 "Roast someone playfully 😂",
@@ -168,52 +170,55 @@ var extremeDares = [
 "Speak in slow motion for 2 minutes 🐢"
 ];
 
-function setMode(selectedMode) {
-    mode = selectedMode;
+function setMode(selectedMode){
+mode=selectedMode;
 }
 
-function spinBottle() {
-    var bottle = document.getElementById("bottle");
-    var shadow = document.getElementById("shadow");
-    var sound = document.getElementById("spinSound");
+function spinBottle(){
+if(spinning) return;
 
-    var randomDegree = Math.floor(Math.random() * 3600 + 720);
+spinning=true;
 
-    bottle.style.transform = "rotate(" + randomDegree + "deg)";
-    shadow.style.transform = "scale(1.5)";
-    sound.play();
+var bottle=document.getElementById("bottle");
+var shadow=document.getElementById("shadow");
+var sound=document.getElementById("spinSound");
 
-    setTimeout(function() {
-        shadow.style.transform = "scale(1)";
-        showDare();
-    }, 3000);
+var randomDegree=Math.floor(Math.random()*3600+1080);
+
+bottle.style.transform="rotate("+randomDegree+"deg)";
+shadow.style.transform="scale(1.5)";
+sound.play();
+
+bottle.addEventListener("transitionend",function handler(){
+shadow.style.transform="scale(1)";
+showDare();
+spinning=false;
+bottle.removeEventListener("transitionend",handler);
+});
 }
 
-function showDare() {
-    var dareList = mode === "couple" ? coupleDares : extremeDares;
-    var random = Math.floor(Math.random() * dareList.length);
-    document.getElementById("dareText").innerText = dareList[random];
-    document.getElementById("popup").style.display = "block";
-    createConfetti();
+function showDare(){
+var dareList=mode==="couple"?coupleDares:extremeDares;
+var random=Math.floor(Math.random()*dareList.length);
+document.getElementById("dareText").innerText=dareList[random];
+document.getElementById("popup").style.display="block";
+createConfetti();
 }
 
-function closePopup() {
-    document.getElementById("popup").style.display = "none";
+function closePopup(){
+document.getElementById("popup").style.display="none";
 }
 
-function createConfetti() {
-    for (let i = 0; i < 50; i++) {
-        let confetti = document.createElement("div");
-        confetti.classList.add("confetti");
-        confetti.style.left = Math.random() * 100 + "vw";
-        confetti.style.background =
-            "hsl(" + Math.random() * 360 + ",100%,50%)";
-        document.body.appendChild(confetti);
+function createConfetti(){
+for(let i=0;i<60;i++){
+let confetti=document.createElement("div");
+confetti.classList.add("confetti");
+confetti.style.left=Math.random()*100+"vw";
+confetti.style.background="hsl("+Math.random()*360+",100%,50%)";
+document.body.appendChild(confetti);
 
-        setTimeout(() => {
-            confetti.remove();
-        }, 3000);
-    }
+setTimeout(()=>{confetti.remove();},3000);
+}
 }
 
 </script>
