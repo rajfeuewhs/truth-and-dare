@@ -1,1 +1,222 @@
-v
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Spin Bottle Ultimate</title>
+
+<style>
+body{
+margin:0;
+overflow:hidden;
+background:radial-gradient(circle at center,#111,#000);
+font-family:Arial,sans-serif;
+text-align:center;
+color:#00ffff;
+}
+
+/* MODE BUTTONS */
+.mode-buttons{
+position:fixed;
+top:15px;
+width:100%;
+z-index:10;
+}
+
+.mode-buttons button{
+padding:8px 18px;
+margin:5px;
+border:none;
+border-radius:20px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.couple{background:#ff4da6;color:white;}
+.extreme{background:black;color:white;}
+
+/* FULL SCREEN BOTTLE */
+#bottle-container{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+}
+
+#bottle{
+height:75vh;
+transition:transform 4s cubic-bezier(.17,.67,.83,.67);
+filter:drop-shadow(0 0 40px #00ffff);
+}
+
+/* SHADOW */
+.shadow{
+width:300px;
+height:40px;
+background:radial-gradient(ellipse at center,rgba(0,0,0,0.8) 0%,transparent 80%);
+margin-top:-40px;
+border-radius:50%;
+transition:transform 4s ease-out;
+}
+
+/* SPIN BUTTON */
+.spin-btn{
+position:fixed;
+bottom:30px;
+padding:15px 50px;
+font-size:22px;
+border:none;
+border-radius:40px;
+cursor:pointer;
+background:linear-gradient(45deg,#00ffff,#0088ff);
+color:black;
+}
+
+/* POPUP */
+.popup{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.9);
+backdrop-filter:blur(10px);
+}
+
+.popup-content{
+background:#111;
+color:#00ffff;
+padding:50px;
+border-radius:25px;
+width:90%;
+max-width:700px;
+margin:10% auto;
+box-shadow:0 0 40px #00ffff;
+text-align:center;
+}
+
+.popup-content p{
+font-size:28px;
+}
+
+.close-btn{
+margin-top:20px;
+padding:10px 30px;
+border:none;
+background:red;
+color:white;
+border-radius:30px;
+cursor:pointer;
+}
+
+/* CONFETTI */
+.confetti{
+position:fixed;
+width:12px;
+height:12px;
+top:0;
+animation:fall 3s linear forwards;
+}
+
+@keyframes fall{
+to{
+transform:translateY(100vh) rotate(720deg);
+opacity:0;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="mode-buttons">
+<button class="couple" onclick="setMode('couple')">❤️ Couple Mode</button>
+<button class="extreme" onclick="setMode('extreme')">😈 Extreme Mode</button>
+</div>
+
+<div id="bottle-container">
+<!-- ✅ NEW RELIABLE IMAGE -->
+<img id="bottle" src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Green_glass_bottle.png">
+<div class="shadow" id="shadow"></div>
+</div>
+
+<button class="spin-btn" onclick="spinBottle()">SPIN</button>
+
+<div id="popup" class="popup">
+<div class="popup-content">
+<h2>Dare</h2>
+<p id="dareText"></p>
+<button class="close-btn" onclick="closePopup()">Close</button>
+</div>
+</div>
+
+<script>
+
+var mode="couple";
+var spinning=false;
+
+var coupleDares=[
+"Hold hands for 1 minute ❤️",
+"Say something romantic 💕",
+"Give a warm hug 🤗",
+"Take a cute selfie together 📸",
+"Whisper something sweet 😍"
+];
+
+var extremeDares=[
+"Do 20 pushups 😈",
+"Dance crazy for 30 seconds 🔥",
+"Roast someone playfully 😂",
+"Act like a villain for 1 minute 😎",
+"Speak in slow motion for 2 minutes 🐢"
+];
+
+function setMode(selectedMode){
+mode=selectedMode;
+}
+
+function spinBottle(){
+if(spinning) return;
+spinning=true;
+
+var bottle=document.getElementById("bottle");
+var shadow=document.getElementById("shadow");
+
+var randomDegree=Math.floor(Math.random()*3600+1440);
+
+bottle.style.transform="rotate("+randomDegree+"deg)";
+shadow.style.transform="scale(1.5)";
+
+setTimeout(function(){
+shadow.style.transform="scale(1)";
+showDare();
+spinning=false;
+},4000);
+}
+
+function showDare(){
+var dareList=mode==="couple"?coupleDares:extremeDares;
+var random=Math.floor(Math.random()*dareList.length);
+document.getElementById("dareText").innerText=dareList[random];
+document.getElementById("popup").style.display="block";
+createConfetti();
+}
+
+function closePopup(){
+document.getElementById("popup").style.display="none";
+}
+
+function createConfetti(){
+for(let i=0;i<60;i++){
+let confetti=document.createElement("div");
+confetti.classList.add("confetti");
+confetti.style.left=Math.random()*100+"vw";
+confetti.style.background="hsl("+Math.random()*360+",100%,50%)";
+document.body.appendChild(confetti);
+
+setTimeout(()=>{confetti.remove();},3000);
+}
+}
+
+</script>
+
+</body>
+</html>
