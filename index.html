@@ -46,7 +46,7 @@ font-size:40px;
 color:#ff0044;
 }
 
-/* Bottle Fix */
+/* Bottle */
 #bottle{
 height:auto;
 max-height:65vh;
@@ -214,6 +214,9 @@ var dares=[
 "Try a new pick-up line."
 ];
 
+
+/* 7-9 Second Spin Physics */
+
 function spinBottle(){
 
 if(spinning) return;
@@ -225,16 +228,17 @@ var sound=document.getElementById("spinSound");
 
 sound.play();
 
-let velocity=50;
+let velocity = 70;      // starting speed
+let friction = 0.985;   // slow braking
 
 function rotate(){
 
-velocity*=0.97;
-angle+=velocity;
+velocity *= friction;
+angle += velocity;
 
-bottle.style.transform="rotate("+angle+"deg)";
+bottle.style.transform = "rotate("+angle+"deg)";
 
-if(velocity>0.5){
+if(velocity > 0.3){
 requestAnimationFrame(rotate);
 }else{
 spinning=false;
@@ -245,6 +249,7 @@ showDare();
 
 rotate();
 }
+
 
 function showDare(){
 
