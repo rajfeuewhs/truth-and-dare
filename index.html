@@ -162,12 +162,55 @@ var spinning=false;
 var angle=0;
 
 var dares=[
-"Do 20 pushups 😈",
-"Dance crazy for 30 seconds 🔥",
-"Sing loudly for 20 sec 🎤",
-"Act like a villain 😎",
-"Talk in slow motion for 2 min 🐢",
-"Confess something funny 😂"
+"Put an ice cube in your underwear for one minute.",
+"Perform a sexy belly dance for your partner.",
+"Blindfold your partner and guide them around your body using only touch.",
+"Undress your partner using only your teeth.",
+"Clean the house naked.",
+"Go about your normal day but with no underwear on.",
+"Give your partner a massage, blindfolded.",
+"Fake an orgasm for one minute.",
+"Play spin the bottle and kiss the person the bottle chooses.",
+"Act out your favorite position with the person to your left.",
+"Pretend to give oral action to a bottle for 30 seconds.",
+"If there’s a pool or hot tub, go skinny-dipping.",
+"Hold hands with the person you know least for one minute.",
+"Send a sexy selfie to someone in your contact list.",
+"Take a body shot creatively.",
+"Swap underwear with the person to your right.",
+"Reply to a social media post with a sexy emoji.",
+"Transfer an ice cube from your mouth to someone else’s.",
+"Give a lap dance to a friend.",
+"Remove an item of clothing.",
+"Twerk for 30 seconds.",
+"Perform a striptease for 30 seconds.",
+"Roleplay a fantasy of your choice.",
+"Give a foot massage for one minute.",
+
+"Use each other as a human plate with whipped cream or chocolate.",
+"Share a fantasy your partner never heard before.",
+"Read an erotic bedtime story out loud.",
+"Set up a nude photo shoot.",
+"Sext your partner during work.",
+"Give your partner a lap dance.",
+"Pick one body part and focus attention there.",
+"Try a new pick-up line.",
+"Re-enact your first kiss.",
+"Play the rest of the game naked.",
+"Feed your partner using only your mouth.",
+"Give a full-body massage.",
+"Kiss passionately like a movie climax.",
+"Use body paint creatively.",
+"Twerk to the sexiest song.",
+"Confess a guilty pleasure.",
+"Sexy pillow fight challenge.",
+"Spell what you want using emojis.",
+"Blindfold yourself and guess body parts.",
+"Balance an ice cube on your belly.",
+"Describe why something turned you on.",
+"Strut wearing partner’s clothes.",
+"Pretend action with nearest object.",
+"Try tantric connection."
 ];
 
 function spinBottle(){
@@ -179,10 +222,10 @@ var sound=document.getElementById("spinSound");
 
 sound.play();
 
-let velocity=50;  // starting speed
+let velocity=50;
 
 function rotate(){
-velocity*=0.97;   // slow down gradually
+velocity*=0.97;
 angle+=velocity;
 bottle.style.transform="rotate("+angle+"deg)";
 
