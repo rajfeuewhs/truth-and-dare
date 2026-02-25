@@ -19,14 +19,7 @@ align-items:center;
 flex-direction:column;
 height:100vh;
 color:#00ffaa;
-transition:0.5s;
 text-align:center;
-}
-
-/* Neon Mode */
-.neon{
-background:radial-gradient(circle,#001f2f,#000);
-color:#00ffff;
 }
 
 canvas{
@@ -59,7 +52,7 @@ filter:drop-shadow(0 0 25px rgba(0,255,150,0.4));
 }
 
 /* Buttons */
-.spin-btn, .neon-btn, .full-btn{
+.spin-btn, .full-btn{
 padding:15px 40px;
 font-size:18px;
 border:none;
@@ -68,6 +61,12 @@ cursor:pointer;
 background:linear-gradient(45deg,#00ffaa,#0088ff);
 color:black;
 margin:10px;
+}
+
+/* Spin button upar */
+.spin-btn{
+position:fixed;
+top:80px;
 }
 
 /* Popup */
@@ -138,11 +137,11 @@ opacity:0;
 
 <div class="pointer">⬇</div>
 
+<button class="spin-btn" onclick="spinBottle()">SPIN</button>
+
 <img id="bottle" src="bottle.png">
 
 <button class="full-btn" onclick="toggleFull()">📱 Fullscreen</button>
-<button class="neon-btn" onclick="toggleNeon()">💎 Neon Mode</button>
-<button class="spin-btn" onclick="spinBottle()">SPIN</button>
 
 <audio id="spinSound"
 src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-wheel-2079.mp3"></audio>
@@ -214,8 +213,25 @@ var dares=[
 "Try a new pick-up line."
 ];
 
+/* No Repeat System */
 
-/* 7-9 Second Spin Physics */
+var remainingDares=[...dares];
+
+function getRandomDare(){
+
+if(remainingDares.length===0){
+remainingDares=[...dares];
+}
+
+var index=Math.floor(Math.random()*remainingDares.length);
+
+var selected=remainingDares.splice(index,1)[0];
+
+return selected;
+}
+
+
+/* Realistic Spin 7-12 sec */
 
 function spinBottle(){
 
@@ -228,17 +244,18 @@ var sound=document.getElementById("spinSound");
 
 sound.play();
 
-let velocity = 70;      // starting speed
-let friction = 0.985;   // slow braking
+/* random realistic power */
+let velocity = 60 + Math.random()*30;
+let friction = 0.987 + Math.random()*0.003;
 
 function rotate(){
 
-velocity *= friction;
-angle += velocity;
+velocity*=friction;
+angle+=velocity;
 
-bottle.style.transform = "rotate("+angle+"deg)";
+bottle.style.transform="rotate("+angle+"deg)";
 
-if(velocity > 0.3){
+if(velocity>0.25){
 requestAnimationFrame(rotate);
 }else{
 spinning=false;
@@ -253,9 +270,7 @@ rotate();
 
 function showDare(){
 
-var random=Math.floor(Math.random()*dares.length);
-
-document.getElementById("dareText").innerText=dares[random];
+document.getElementById("dareText").innerText=getRandomDare();
 
 document.getElementById("popup").style.display="flex";
 
@@ -302,13 +317,6 @@ confetti.remove();
 
 }
 
-}
-
-
-/* Neon */
-
-function toggleNeon(){
-document.body.classList.toggle("neon");
 }
 
 </script>
