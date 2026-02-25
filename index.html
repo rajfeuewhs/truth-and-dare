@@ -40,11 +40,13 @@ color:#ff0044;
 }
 
 #bottle{
-height:75vh;
+height:70vh;
+max-height:600px;
 filter:drop-shadow(0 0 25px rgba(0,255,150,0.4));
 }
 
-.spin-btn, .neon-btn{
+/* Buttons */
+.spin-btn, .neon-btn, .full-btn{
 position:fixed;
 padding:15px 40px;
 font-size:18px;
@@ -57,37 +59,53 @@ color:black;
 
 .spin-btn{ bottom:30px; }
 .neon-btn{ bottom:90px; }
+.full-btn{ bottom:150px; }
 
+/* Popup */
 .popup{
 display:none;
 position:fixed;
 inset:0;
 background:rgba(0,0,0,0.9);
 backdrop-filter:blur(10px);
+display:flex;
+justify-content:center;
+align-items:center;
 }
 
 .popup-content{
 background:#111;
 color:#00ffaa;
-padding:50px;
+padding:40px;
 border-radius:25px;
 width:90%;
-max-width:600px;
-margin:10% auto;
+max-width:700px;
 text-align:center;
 box-shadow:0 0 40px #00ffaa;
 }
 
+.popup-content h2{
+font-size:32px;
+margin-bottom:20px;
+}
+
+#dareText{
+font-size:28px;
+line-height:1.4;
+}
+
 .close-btn{
-margin-top:20px;
-padding:10px 30px;
+margin-top:25px;
+padding:12px 35px;
 border:none;
 background:red;
 color:white;
 border-radius:30px;
 cursor:pointer;
+font-size:18px;
 }
 
+/* Confetti */
 .confetti{
 position:fixed;
 width:12px;
@@ -112,6 +130,7 @@ opacity:0;
 
 <img id="bottle" src="bottle.png">
 
+<button class="full-btn" onclick="toggleFull()">📱 Fullscreen</button>
 <button class="neon-btn" onclick="toggleNeon()">💎 Neon Mode</button>
 <button class="spin-btn" onclick="spinBottle()">SPIN</button>
 
@@ -164,53 +183,10 @@ var angle=0;
 var dares=[
 "Put an ice cube in your underwear for one minute.",
 "Perform a sexy belly dance for your partner.",
-"Blindfold your partner and guide them around your body using only touch.",
-"Undress your partner using only your teeth.",
-"Clean the house naked.",
-"Go about your normal day but with no underwear on.",
-"Give your partner a massage, blindfolded.",
-"Fake an orgasm for one minute.",
-"Play spin the bottle and kiss the person the bottle chooses.",
-"Act out your favorite position with the person to your left.",
-"Pretend to give oral action to a bottle for 30 seconds.",
-"If there’s a pool or hot tub, go skinny-dipping.",
-"Hold hands with the person you know least for one minute.",
-"Send a sexy selfie to someone in your contact list.",
-"Take a body shot creatively.",
-"Swap underwear with the person to your right.",
-"Reply to a social media post with a sexy emoji.",
-"Transfer an ice cube from your mouth to someone else’s.",
-"Give a lap dance to a friend.",
-"Remove an item of clothing.",
-"Twerk for 30 seconds.",
-"Perform a striptease for 30 seconds.",
-"Roleplay a fantasy of your choice.",
-"Give a foot massage for one minute.",
-
-"Use each other as a human plate with whipped cream or chocolate.",
-"Share a fantasy your partner never heard before.",
-"Read an erotic bedtime story out loud.",
-"Set up a nude photo shoot.",
-"Sext your partner during work.",
-"Give your partner a lap dance.",
-"Pick one body part and focus attention there.",
-"Try a new pick-up line.",
-"Re-enact your first kiss.",
-"Play the rest of the game naked.",
-"Feed your partner using only your mouth.",
-"Give a full-body massage.",
-"Kiss passionately like a movie climax.",
-"Use body paint creatively.",
-"Twerk to the sexiest song.",
-"Confess a guilty pleasure.",
-"Sexy pillow fight challenge.",
-"Spell what you want using emojis.",
-"Blindfold yourself and guess body parts.",
-"Balance an ice cube on your belly.",
-"Describe why something turned you on.",
-"Strut wearing partner’s clothes.",
-"Pretend action with nearest object.",
-"Try tantric connection."
+"Dance crazy for 30 seconds.",
+"Sing loudly for 20 sec.",
+"Act like a villain.",
+"Confess something funny."
 ];
 
 function spinBottle(){
@@ -242,12 +218,21 @@ rotate();
 function showDare(){
 var random=Math.floor(Math.random()*dares.length);
 document.getElementById("dareText").innerText=dares[random];
-document.getElementById("popup").style.display="block";
+document.getElementById("popup").style.display="flex";
 createConfetti();
 }
 
 function closePopup(){
 document.getElementById("popup").style.display="none";
+}
+
+/* Fullscreen */
+function toggleFull(){
+if(!document.fullscreenElement){
+document.documentElement.requestFullscreen();
+}else{
+document.exitFullscreen();
+}
 }
 
 function createConfetti(){
