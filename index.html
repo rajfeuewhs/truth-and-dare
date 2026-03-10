@@ -6,15 +6,6 @@
 
 <title>Spin Bottle Pro Max</title>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8J8XD5142S"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-8J8XD5142S');
-</script>
-
 <style>
 
 body{
@@ -38,7 +29,6 @@ left:0;
 z-index:-1;
 }
 
-/* Pointer */
 .pointer{
 position:fixed;
 top:20px;
@@ -48,20 +38,13 @@ font-size:40px;
 color:#ff0044;
 }
 
-/* Bottle */
 #bottle{
-height:auto;
 max-height:65vh;
 max-width:90vw;
-width:auto;
-object-fit:contain;
-display:block;
-margin:auto;
 filter:drop-shadow(0 0 25px rgba(0,255,150,0.4));
 }
 
-/* Buttons */
-.spin-btn, .full-btn{
+.spin-btn,.full-btn{
 padding:15px 40px;
 font-size:18px;
 border:none;
@@ -72,16 +55,13 @@ color:black;
 margin:10px;
 }
 
-/* Spin button */
 .spin-btn{
 position:fixed;
 bottom:140px;
 left:50%;
 transform:translateX(-50%);
-z-index:10;
 }
 
-/* Popup */
 .popup{
 display:none;
 position:fixed;
@@ -96,22 +76,14 @@ padding:20px;
 .popup-content{
 background:#111;
 color:#00ffaa;
-padding:30px 25px;
+padding:30px;
 border-radius:25px;
-width:95%;
 max-width:600px;
-text-align:center;
 box-shadow:0 0 40px #00ffaa;
-}
-
-.popup-content h2{
-font-size:28px;
-margin-bottom:15px;
 }
 
 #dareText{
 font-size:22px;
-line-height:1.5;
 }
 
 .close-btn{
@@ -124,7 +96,6 @@ border-radius:30px;
 cursor:pointer;
 }
 
-/* Confetti */
 .confetti{
 position:fixed;
 width:12px;
@@ -205,26 +176,69 @@ requestAnimationFrame(animateStars);
 
 animateStars();
 
+/* 1000+ GF BF DARES */
 
-/* Game Logic */
+var actions=[
+"give a compliment",
+"say something romantic",
+"send a cute message",
+"say a pickup line",
+"share a secret",
+"do a funny dance",
+"sing a romantic line",
+"tell why you like them",
+"send a selfie",
+"act like a movie hero",
+"say something cute",
+"tell an embarrassing moment",
+"pretend to propose",
+"act jealous",
+"say your crush name"
+];
+
+var targets=[
+"to your crush",
+"to your partner",
+"to the person on left",
+"to the person on right",
+"to the spinner",
+"to your best friend",
+"to someone you like",
+"to the tallest person",
+"to the shortest person",
+"to everyone"
+];
+
+var endings=[
+"for 10 seconds",
+"for 20 seconds",
+"right now",
+"without laughing",
+"with confidence",
+"while dancing",
+"while smiling",
+"like a movie character",
+"dramatically",
+"with full energy"
+];
+
+var dares=[];
+
+for(let i=0;i<1000;i++){
+let dare=
+actions[Math.floor(Math.random()*actions.length)]+" "+
+targets[Math.floor(Math.random()*targets.length)]+" "+
+endings[Math.floor(Math.random()*endings.length)];
+
+dares.push(dare);
+}
+
+var remainingDares=[...dares];
+
+/* Bottle Spin */
 
 var spinning=false;
 var angle=0;
-
-var dares=[
-"Put an ice cube in your underwear for one minute.",
-"Perform a sexy belly dance.",
-"Dance crazy for 30 seconds.",
-"Sing loudly for 20 seconds.",
-"Act like a villain.",
-"Confess something funny.",
-"Give a lap dance.",
-"Twerk for 30 seconds.",
-"Kiss passionately.",
-"Try a new pick-up line."
-];
-
-var remainingDares=[...dares];
 
 function getRandomDare(){
 if(remainingDares.length===0){
@@ -297,4 +311,4 @@ setTimeout(()=>confetti.remove(),3000);
 </script>
 
 </body>
-</html>
+  </html>
