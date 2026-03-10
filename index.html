@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Spin Bottle Pro Max</title>
+<title>Spin Bottle</title>
 
 <style>
 
@@ -84,6 +84,7 @@ box-shadow:0 0 40px #00ffaa;
 
 #dareText{
 font-size:22px;
+line-height:1.5;
 }
 
 .close-btn{
@@ -176,62 +177,39 @@ requestAnimationFrame(animateStars);
 
 animateStars();
 
-/* 1000+ GF BF DARES */
+/* DARES */
 
-var actions=[
-"give a compliment",
-"say something romantic",
-"send a cute message",
-"say a pickup line",
-"share a secret",
-"do a funny dance",
-"sing a romantic line",
-"tell why you like them",
-"send a selfie",
-"act like a movie hero",
-"say something cute",
-"tell an embarrassing moment",
-"pretend to propose",
-"act jealous",
-"say your crush name"
+var dares=[
+
+"Give someone in the room a genuine compliment without overthinking it.",
+"Make eye contact with the person to your left for 15 seconds without laughing.",
+"Send a random emoji to the last person you texted.",
+"Act out what your ideal first date looks like — no explaining.",
+"Pick a song you’d put on to set a flirty mood.",
+"Describe your perfect romantic movie moment in one sentence.",
+"Give your best confident walk across the room.",
+"Tell someone in the room one thing you admire about their vibe.",
+"Pretend you’re introducing yourself on a first date — confidence only.",
+"Text someone you like (or liked) a simple 'thinking of you.'",
+"Repeat the hottest compliment you’ve ever received like you’re bragging.",
+"Choose someone and say what makes them instantly likable.",
+"Recreate your go-to 'I’m interested' body language move.",
+"Pick a word you think is underratedly romantic and explain why.",
+"Make up a flirty but harmless nickname for yourself.",
+"Tell the group what kind of date would immediately win you over.",
+"Give a dramatic reading of a totally normal sentence.",
+"Choose someone and guess what their ideal date vibe is.",
+"Hold hands with the person next to you for the rest of the round.",
+"Give your best subtle smile — the kind that says 'I know something you don’t.'",
+"Lean in and say one word you’d only use when flirting.",
+"Send a 😏 emoji to the person you’re playing with.",
+"Say one flirty sentence you’d feel confident texting someone.",
+"Pick a song you’d put on to set a mood and play 10 seconds of it.",
+"Give someone a compliment that’s not about their appearance.",
+"Say someone’s name in your flirtiest tone.",
+"Show a pic of the last outfit you wore that made you feel hot."
+
 ];
-
-var targets=[
-"to your crush",
-"to your partner",
-"to the person on left",
-"to the person on right",
-"to the spinner",
-"to your best friend",
-"to someone you like",
-"to the tallest person",
-"to the shortest person",
-"to everyone"
-];
-
-var endings=[
-"for 10 seconds",
-"for 20 seconds",
-"right now",
-"without laughing",
-"with confidence",
-"while dancing",
-"while smiling",
-"like a movie character",
-"dramatically",
-"with full energy"
-];
-
-var dares=[];
-
-for(let i=0;i<1000;i++){
-let dare=
-actions[Math.floor(Math.random()*actions.length)]+" "+
-targets[Math.floor(Math.random()*targets.length)]+" "+
-endings[Math.floor(Math.random()*endings.length)];
-
-dares.push(dare);
-}
 
 var remainingDares=[...dares];
 
