@@ -3,26 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Truth or Dare - Private</title>
+    <title>Truth & Dare Pro</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Truth or Dare</h1>
-        <div class="wheel-container">
-            <div id="wheel" class="wheel">?</div>
-            <div class="pointer"></div>
+    <div class="glass-container">
+        <h1 class="glow-text">Truth or Dare</h1>
+        
+        <div class="bottle-stage">
+            <div id="bottle" class="neon-bottle"></div>
         </div>
-        
-        <button id="spin-btn">Spin the Wheel</button>
-        
-        <div id="result-area" class="hidden">
-            <h2 id="player-turn"></h2>
-            <div class="options">
-                <button onclick="getTask('truth')">Truth</button>
-                <button onclick="getTask('dare')">Dare</button>
+
+        <div class="controls">
+            <button id="spin-btn">SPIN THE BOTTLE</button>
+            <div id="game-panel" class="hidden">
+                <h3 id="player-label">Who's Next?</h3>
+                <div class="choice-row">
+                    <button class="t-btn" onclick="play('truth')">Truth</button>
+                    <button class="d-btn" onclick="play('dare')">Dare</button>
+                </div>
+                <div id="display-card" class="card">Spin to start...</div>
             </div>
-            <p id="task-display"></p>
         </div>
     </div>
     <script src="script.js"></script>
